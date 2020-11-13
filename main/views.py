@@ -1,13 +1,14 @@
 from django.http import HttpResponse
 from django.views import View
 from django.shortcuts import render
-# from .forms import MyForm
+from main import forms
 
 
 class TextPreprocessing(View):
     # form_class = MyForm
-    initial = {'key': 'value'}
+    # initial = {'key': 'value'}
     template_name = 'preprocessing/preprocessing.html'
+    form_class = forms.PreprocessingForm
 
     def get(self, request, *args, **kwargs):
         # form = self.form_class(initial=self.initial)
