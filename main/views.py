@@ -1,7 +1,22 @@
 from django.http import HttpResponse
 from django.views import View
+from django.shortcuts import render
+# from .forms import MyForm
+
 
 class TextPreprocessing(View):
-    def get(self, request):
-        # <view logic>
-        return HttpResponse('result')
+    # form_class = MyForm
+    initial = {'key': 'value'}
+    template_name = 'preprocessing/preprocessing.html'
+
+    def get(self, request, *args, **kwargs):
+        # form = self.form_class(initial=self.initial)
+        return render(request, self.template_name)
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            # <process form cleaned data>
+            return HttpResponseRedirect('/success/')
+
+        return render(request, self.template_name, {'form': form})
