@@ -1,7 +1,6 @@
 from django.urls import path
-
-from . import views
+from main.views import TextPreprocessing
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('preprocessing/', TextPreprocessing.as_view()),
 ]

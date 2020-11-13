@@ -1,5 +1,7 @@
 from django.http import HttpResponse
+from django.views import View
 
-
-def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
+class TextPreprocessing(View):
+    def get(self, request):
+        # <view logic>
+        return HttpResponse('result')
