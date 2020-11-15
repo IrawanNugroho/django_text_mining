@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
     <center><h2>Text Preprocessing</h2></center>
-    <form method = "POST" class="container">
+    <form id="preprocessing" class="container">
         {% csrf_token %}
         <div class ="form-group">        
             {{ form.message.label_tag }}         
@@ -12,10 +12,30 @@
         </div>
         <button type ="submit" class ="btn btn-primary"> Tokenization </button >
         
-        <button type ="submit" class ="btn btn-primary"> Stemming </button > 
+        {% comment %} <button type ="submit" class ="btn btn-primary"> Stemming </button > 
 
         <button type ="submit" class ="btn btn-primary"> Lemmatization </button >
 
-        <button type ="submit" class ="btn btn-primary"> Stop Words </button >  
+        <button type ="submit" class ="btn btn-primary"> Stop Words </button >   {% endcomment %}
     </form >
  {% endblock content %}
+
+ {% block js %}
+    <script>
+        $(document).ready(function(){
+            $('#preprocessing').submit(function(event) {
+                event.preventDefault();
+                $.ajax({
+                    type:"POST",
+                    url:"{% url 'preprocessing' %}",
+                    data : {'message': $('#message').val(),
+                            },
+                    success: function(result){
+                        console.log(result)
+                    }
+                });
+                return false;
+            })
+        });
+    </script>
+ {% endblock %}

@@ -19,4 +19,5 @@ class TextPreprocessing(View):
         result = stemming(result)
         result = lemmatization(result)
         result = stop_words(result)
-        return JsonResponse(result, safe=False)
+        # return JsonResponse(result, safe=False)
+        return result
