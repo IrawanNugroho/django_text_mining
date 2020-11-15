@@ -1,16 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
     <center><h2>Text Preprocessing</h2></center>
-    <form method = "POST">
-     {% csrf_token %}
-     <div class =" form-group">        
-         {{ form.message.label_tag }}         
-         <textarea class ="form-control {% if form.message.errors %} is-invalid{% endif %}" id ="id_message" name ="message" rows ="20" cols="150">{{ form.message.value | default:""}}</textarea >
-         {% if form.message.errors %}
-             <div class ="invalid-feedback">{{ form.message.errors }}</div>
-         {% endif %}     
-     </div>     
+    <form method = "POST" class="container">
+        {% csrf_token %}
+        <div class ="form-group">        
+            {{ form.message.label_tag }}         
+            <textarea class ="form-control {% if form.message.errors %} is-invalid{% endif %}" id ="id_message" name ="message" rows ="20">{{ form.message.value | default:""}}</textarea >
+            {% if form.message.errors %}
+                <div class ="invalid-feedback">{{ form.message.errors }}</div>
+            {% endif %}     
+        </div>
+        <button type ="submit" class ="btn btn-primary"> Tokenization </button >
+        
+        <button type ="submit" class ="btn btn-primary"> Stemming </button > 
 
-     <button type ="submit" class ="btn btn-primary"> Submit </button > 
- </form >
+        <button type ="submit" class ="btn btn-primary"> Lemmatization </button >
+
+        <button type ="submit" class ="btn btn-primary"> Stop Words </button >  
+    </form >
  {% endblock content %}
