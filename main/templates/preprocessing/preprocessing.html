@@ -5,7 +5,7 @@
         {% csrf_token %}
         <div class ="form-group">        
             {{ form.message.label_tag }}         
-            <textarea class ="form-control {% if form.message.errors %} is-invalid{% endif %}" id ="id_message" name ="message" rows ="20">{{ form.message.value | default:""}}</textarea >
+            <textarea class ="form-control {% if form.message.errors %} is-invalid{% endif %}" id ="message" name ="message" rows ="20">{{ form.message.value | default:""}}</textarea >
             {% if form.message.errors %}
                 <div class ="invalid-feedback">{{ form.message.errors }}</div>
             {% endif %}     
@@ -28,7 +28,8 @@
                 $.ajax({
                     type:"POST",
                     url:"{% url 'preprocessing' %}",
-                    data : {'message': $('#message').val(),
+                    data : {'json_data': JSON.stringify({'message': $('#message').val()}),
+                            'csrfmiddlewaretoken': '{{ csrf_token }}',
                             },
                     success: function(result){
                         console.log(result)
